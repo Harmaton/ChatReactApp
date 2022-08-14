@@ -14,12 +14,15 @@ function App() {
   const [room, setRoom] = useState("");
 
 
-  const joinRooms = () => {
+  const joinRoom = () => {
     if (username !== "" && room !== "") {
-      
+      socket.emit("join_room", room);
+      console.log(`user with id: ${socket.id} joined room:`);
       
     }
   };
+
+ 
 
   return (
     <div className="App">
@@ -36,9 +39,18 @@ function App() {
       type="text"
       placeholder = " Room ID ..."
       onChange = {(event) => {
-        setRoom(event.target.value);>
+        setRoom(event.target.value);}}
+        >
       </input>
+
+      <div className ="joinbutn">
+     <button onClick = {joinRoom} > JOIN A room</button> 
+     <Chat socket={socket} username={username} room={room}/>
     </div>
+
+    </div>
+    
+    
   );
 }
 
