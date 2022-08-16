@@ -24,6 +24,10 @@ Socket.on("join_room", (data) => {
 Socket.join(data);
 });
 
+socket.on("send_message", (data) => {
+Socket.to(data.room).emit("receive_message",data);
+});
+
 Socket.on("disconnect", () => {
 console.log("user disconnected", socket.id)
 });
